@@ -1,64 +1,43 @@
-<footer>
+<!-- Footer -->
+<div class="footer bg-gray">
+    <img class="decoration-city" src="images/decoration-city.svg" alt="alternative">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          {{-- <p>Berlangganan email Letter Kami</p> --}}
-          <h4>Tentang</h4>
-          {{-- <input type="text" class="form-control subscribe-footer" class="Email Anda" placeholder="Email Anda"/> --}}
-          <p>
-            {{ $setting->meta_description }}
-          </p>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3">
-          <h6>Pembayaran</h6>
-          <div class="row">
-            <div class="col-4 mx-0 mb-1">
-              <img src="{{ asset('assets/frontend/img/bni.png') }}" alt="" class="img-fluid">
-            </div>
-            <div class="col-4 mx-0 mb-1">
-              <img src="{{ asset('assets/frontend/img/bca.png') }}" alt="" class="img-fluid">
-            </div>
-            <div class="col-4 mx-0 mb-1">
-              <img src="{{ asset('assets/frontend/img/mandiri.png') }}" alt="" class="img-fluid">
-            </div>
-            <div class="col-4 mx-0 mb-1">
-              <img src="{{ asset('assets/frontend/img/alfamart.png') }}" alt="" class="img-fluid">
-            </div>
-            <div class="col-4 mx-0 mb-1">
-              <img src="{{ asset('assets/frontend/img/indomaret.png') }}" alt="" class="img-fluid">
-            </div>
-            <div class="col-4 mx-0 mb-1">
-              <img src="{{ asset('assets/frontend/img/shopepay.png') }}" alt="" class="img-fluid">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3">
-          <h6>Sosial Media</h6>
-          <ul class="list-inline">
-            @foreach ($socmeds as $socmed)
-            <li class="list-inline-item pr-2">
-                <a href="{{ $socmed->link }}">
-                  <img src="{{ $socmed->icon() }}" class="img-fluid imgSocmed" alt="{{ $socmed->name }}" style="height: 30px">
-                </a>
-              </li>
-            @endforeach
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <div class="container-fluid footer-end">
-    <div class="row">
-      <div class="col-md-12">
-        <p class="text-center">2022 &copy; By {{ $setting->author }}</p>
-      </div>
-    </div>
-  </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Pellentesque aliquet mi eu tortor dictum, non imperdiet ante viverra. Phasellus eget enim orci ut pellentes troc</h4>
+                <div class="social-container">
+                   @foreach ($socmeds as $socmed)
+                   <span class="fa-stack">
+                    <a href="{{ $socmed->link }}" target="_blank">
+                       <img src="{{ $socmed->icon() }}" class="img-fluid" alt="">
+                    </a>
+                </span>
+                   @endforeach
+                </div> <!-- end of social-container -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of footer -->
+<!-- end of footer -->
+<div class="copyright bg-gray">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-2">
+                <p class="p-small text-center statement">Copyright © <a href="#">Me</a></p>
+            </div> <!-- end of col -->
+        </div> <!-- enf of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of copyright -->
+<!-- Back To Top Button -->
+<button onclick="topFunction()" id="myBtn">
+    <img src="{{ asset('assets/frontend/images/up-arrow.png') }}" alt="alternative">
+</button>
 
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <script src="{{ asset('assets/frontend/js/popper.min.js') }}"></script>
-{{-- <script src="{{ asset('assets/frontend/js/bootstrap.bundle.min.js') }}"></script> --}}
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- end of back to top button -->
+<script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
+<script src="{{ asset('assets/frontend/js/swiper.min.js') }}"></script> <!-- Swiper for image and text sliders -->
+<script src="{{ asset('assets/frontend/js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
+<script src="{{ asset('assets/frontend/js/isotope.pkgd.min.js') }}"></script> <!-- Isotope for filter -->
+<script src="{{ asset('assets/frontend/js/scripts.js') }}"></script> <!-- Custom scripts -->
+
 @stack('scripts')

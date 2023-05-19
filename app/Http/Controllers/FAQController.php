@@ -8,7 +8,7 @@ class FAQController extends Controller
 {
     public function index(){
         $title = 'FAQ';
-        return view('frontend.pages.faq.index',[
+        return view('frontend.pages.faq',[
             'title' => $title
         ]);
     }

@@ -26,17 +26,7 @@ class Post extends Model
         {
             return asset('storage/' . $this->image);
         }else{
-            return asset('assets/img/news/img01.jpg');
-        }
-    }
-
-    public function getImageAttribute($value)
-    {
-        if($value)
-        {
-            return asset('storage/' . $value);
-        }else{
-            return asset('assets/img/news/img01.jpg');
+            return asset('assets/frontend/images/project-1.jp');
         }
     }
 }

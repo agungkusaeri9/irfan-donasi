@@ -3,11 +3,7 @@
 @section('content')
     <section class="section">
         <div class="container-fluid">
-            <div class="row" style="height: 100vh">
-                <div class="col-md-7 "
-                    style="background-image: url({{ asset('assets/img/bg-auth.jpg') }});background-repeat:no-repeat;background-size:cover">
-
-                </div>
+            <div class="row justify-content-center" style="height: 100vh">
                 <div class="col-md-5 mb-4 mt-4 align-self-center" style="padding-right: 80px;padding-left: 80px;">
                     <div class="login-brand text-center mb-5">
                         <a href="{{ route('home') }}">
@@ -18,7 +14,7 @@
 
                     <div class="card card-primary login-c">
                         <div class="card-header">
-                            <h5 class="font-weight-normal">Register</h5>
+                            <h5 class="font-weight-normal text-center mt-2">Register</h5>
                         </div>
 
                         <div class="card-body">

@@ -9,18 +9,18 @@ class ArtikelController extends Controller
 {
     public function index()
     {
-        $post = Post::latest()->get();
+        $posts = Post::latest()->get();
         return view('frontend.pages.artikel.index',[
-            'post' => $post,
+            'posts' => $posts,
             'keyword' => NULL
         ]);
     }
 
     public function detail($slug){
-        $item = Post::with('tags','category')->withCount('tags')->where('slug',$slug)->firstOrFail();
-        return view('frontend.pages.artikel.detail',[
+        $item = Post::with('category')->where('slug',$slug)->firstOrFail();
+        return view('frontend.pages.artikel.show',[
             'title' => $item->title,
-            'item' => $item
+            'post' => $item
         ]);
     }
 
