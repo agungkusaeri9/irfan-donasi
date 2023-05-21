@@ -25,13 +25,11 @@ class DatabaseSeeder extends Seeder
             [
             RoleTableSeeder::class,
             UserTableSeeder::class,
-            PostCategoryTableSeeder::class,
-            PostTagTableSeeder::class,
-            // PostTableSeeder::class,
-            ProgramCategorySeeder::class,
+            // PostCategoryTableSeeder::class,
+            // ProgramCategorySeeder::class,
             SocmedTableSeeder::class,
             SettingTableSeeder::class,
-            PermissionTableSeeder::class
+            // PermissionTableSeeder::class
             ]
         );
     }

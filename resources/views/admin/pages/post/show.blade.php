@@ -77,7 +77,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
-                            <img src="{{ $item->image }}" class="img-fluid w-100 postImage" alt="{{ $item->title }}">
+                            <img src="{{ $item->image() }}" class="img-fluid w-100 postImage" alt="{{ $item->title }}">
                             <div class="description mt-3">
                                 {!! $item->description !!}
                             </div>

@@ -44,7 +44,7 @@ class Transaction extends Model
 
     public function avatar()
     {
-        return asset('assets/img/avatar/avatar-1.png');
+        return asset('assets/img/avatar.svg');
     }
 
     public function scopeName()

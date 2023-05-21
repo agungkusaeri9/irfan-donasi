@@ -46,20 +46,20 @@ class PostController extends Controller
                         return $model->user->name ?? '-';
                     })
                     ->addColumn('image', function($model){
-                        return '<img src='.$model->image.' class="img-fluid" style="max-height:70px"></img>';
+                        return '<img src='.$model->image().' class="img-fluid" style="max-height:70px"></img>';
                     })
                     ->addColumn('action',function($model){
                         $route = route('admin.posts.edit',$model->id);
                         $routeDetail = route('admin.posts.show',$model->id);
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' || auth()->user()->getPermissions('Post Detail'))
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' || auth()->user()->getPermissions('Post Detail'))
                         {
                          $detail = "<a href='$routeDetail' class='btn btn-sm btn-warning btnDetail mx-1' data-id='$model->id' data-title='$model->title'><i class='fas fa fa-eye'></i> Detail</a>";
                         }else{
                          $detail = "";
                         }
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' || auth()->user()->getPermissions('Post Edit'))
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' || auth()->user()->getPermissions('Post Edit'))
                         {
                          $edit = "<a href='$route' class='btn btn-sm btn-info btnEdit mx-1' data-id='$model->id' data-title='$model->title'><i class='fas fa fa-edit'></i> Edit</a>";
                         }else{
@@ -67,7 +67,7 @@ class PostController extends Controller
                         }
 
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' || auth()->user()->getPermissions('Post Delete'))
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' || auth()->user()->getPermissions('Post Delete'))
                         {
                          $delete = "<button class='btn btn-sm btn-danger btnDelete mx-1' data-id='$model->id' data-title='$model->title'><i class='fas fa fa-trash'></i> Hapus</button>";
                         }else{
@@ -78,7 +78,7 @@ class PostController extends Controller
                         return $action;
                     })
                     ->editColumn('status',function($model){
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' || auth()->user()->getpermissions('Post Change Status')){
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' || auth()->user()->getpermissions('Post Change Status')){
                             if($model->status == 1)
                         {
                             $status = '<div class="custom-control custom-switch">

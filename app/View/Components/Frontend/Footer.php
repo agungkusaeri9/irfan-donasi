@@ -27,6 +27,7 @@ class Footer extends Component
     {
         $setting = Setting::first();
         $socmeds = Socmed::get();
-        return view('components.frontend.footer',compact('socmeds','setting'));
+        $link = 'https://wa.me/' . $setting->phone;
+        return view('components.frontend.footer',compact('socmeds','setting','link'));
     }
 }

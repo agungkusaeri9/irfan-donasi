@@ -12,7 +12,8 @@ class ArtikelController extends Controller
         $posts = Post::latest()->get();
         return view('frontend.pages.artikel.index',[
             'posts' => $posts,
-            'keyword' => NULL
+            'keyword' => NULL,
+            'title' => 'Berita Terbaru'
         ]);
     }
 

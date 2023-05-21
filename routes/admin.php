@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KerjasamaController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PostTagController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RelawanController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
@@ -64,6 +66,16 @@ Route::post('program-budget',[ProgramController::class,'budgets'])->name('progra
 // socmed
 Route::get('socmeds/data',[SocmedController::class,'data'])->name('socmeds.data');
 Route::resource('socmeds',SocmedController::class)->except('create','show','edit','update');
+
+// kerjasama
+Route::get('kerjasama/data',[KerjasamaController::class,'data'])->name('kerjasama.data');
+Route::resource('kerjasama',KerjasamaController::class)->except('create','show','edit','update');
+
+
+// relawan
+Route::get('relawan/data',[RelawanController::class,'data'])->name('relawan.data');
+Route::resource('relawan',RelawanController::class)->except('create','show','edit','update');
+
 
 // sliders
 Route::get('sliders/data',[SliderController::class,'data'])->name('sliders.data');

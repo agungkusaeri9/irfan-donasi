@@ -86,7 +86,7 @@ class RegisterController extends Controller
             'username' => Str::replace(' ','',$data['name'] . rand(100,999)),
             'status' => 1
         ]);
-        $user->assignRole('Donatur');
+        $user->assignRole('User');
         return $user;
     }
 
@@ -95,7 +95,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         try {
-            $role_donatur = Role::findByName('donatur');
+            $role_donatur = Role::findByName('user');
             if (!$role_donatur) {
                 return redirect()->route('register')->with('error', 'Mohon maaf untuk saat ini donatur belum bisa mendaftar.');
             }

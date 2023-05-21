@@ -41,13 +41,13 @@ class PaymentController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action',function($model){
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' || auth()->user()->getPermissions('Payment Edit'))
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' || auth()->user()->getPermissions('Payment Edit'))
                         {
                             $edit = "<button class='btn btn-sm btn-info btnEdit mx-1' data-id='$model->id' data-name='$model->name' data-number='$model->number' data-description='$model->description'><i class='fas fa fa-edit'></i> Edit</button>";
                         }else{
                             $edit = "";
                         }
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' || auth()->user()->getPermissions('Payment Delete'))
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' || auth()->user()->getPermissions('Payment Delete'))
                         {
                             $delete = "<button class='btn btn-sm btn-danger btnDelete mx-1' data-id='$model->id' data-name='$model->name'><i class='fas fa fa-trash'></i> Hapus</button>";
                         }else{

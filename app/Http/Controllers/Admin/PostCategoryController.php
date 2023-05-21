@@ -41,13 +41,13 @@ class PostCategoryController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action',function($model){
-                       if(auth()->user()->getRoleNames()->first() === 'Super Admin' ||auth()->user()->getPermissions('Post Category Edit')){
+                       if(auth()->user()->getRoleNames()->first() === 'Admin' ||auth()->user()->getPermissions('Post Category Edit')){
                         $act_edit = "<button class='btn btn-sm btn-info btnEdit mx-1' data-id='$model->id' data-name='$model->name'><i class='fas fa fa-edit'></i> Edit</button>";
                        }else{
                         $act_edit = "";
                        }
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' ||auth()->user()->getPermissions('Post Category Delete'))
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' ||auth()->user()->getPermissions('Post Category Delete'))
                         {
                             $act_delete = "<button class='btn btn-sm btn-danger btnDelete mx-1' data-id='$model->id' data-name='$model->name'><i class='fas fa fa-trash'></i> Hapus</button>";
                         }else{

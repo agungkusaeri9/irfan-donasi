@@ -45,19 +45,12 @@ class TransactionController extends Controller
             'nominal' => ['required', 'numeric'],
             'program_id' => ['required', 'numeric'],
             'phone_number' => ['required'],
-            'name' => ['required']
+            'name' => ['required'],
+            'payment_id' => ['required']
         ]);
 
         $data = request()->only(['payment_id', 'name', 'acceptance', 'is_anonim', 'nominal', 'program_id', 'email', 'phone_number', 'type']);
         $data['phone_number'] = request('phone_number');
-
-        if(request('type') === 'manual')
-        {
-            if(request('payment_id') == NULL)
-            {
-                return redirect()->back()->with('error', 'Pilih terlebih dahulu metode pembayarannya.');
-            }
-        }
 
         try {
             // cek login
@@ -66,11 +59,10 @@ class TransactionController extends Controller
             } else {
                 $data['user_id'] = auth()->id();
             }
-
             $u_code = rand(100, 999);
             $data['u_code'] = $u_code;
             $data['nominal'] = $data['nominal'] + $u_code;
-            $latest = Transaction::withTrashed()->latest()->first();
+            $latest = Transaction::latest()->first();
             // cek apakah ada transaksi
             if ($latest) {
                 $code_date = Str::substr($latest->code, 0, 8);
@@ -92,13 +84,6 @@ class TransactionController extends Controller
             // insert ke db
             $transaction = Transaction::create($data);
 
-            if ($transaction->type === 'manual') {
-                // send notification admin
-                Wablas::sendAdmin($transaction->id);
-
-                // send notification donatur
-                Wablas::send($transaction->id, $transaction->phone_number, 'Created');
-            }
             $encrypt_code = encrypt($transaction->code);
             return redirect()->route('success', $encrypt_code)->with(['success', 'Donasi Berhasil silahkan lakukan transfer!', 'code' => $transaction->code]);
         } catch (\Throwable $th) {
@@ -117,42 +102,8 @@ class TransactionController extends Controller
         return view('frontend.pages.transaction.success', [
             'title' => 'Berhasil',
             'item' => $item,
-            'setting' => $setting
+            'setting' => $setting,
+            'success' => 'Transaksi berhasil dilakuka. Silahkan lakukan pembayaran sesuai yang tertera dibawah ini'
         ]);
-    }
-
-    public function createPayment()
-    {
-        $transaction_id = request('transaction_id');
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-rn2NDQJa_PfWjZrLDddP0ovP';
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
-        $transaction = Transaction::findOrFail($transaction_id);
-
-
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => $transaction->code,
-                'gross_amount' => $transaction->nominal,
-            ),
-            'customer_details' => array(
-                'first_name' => $transaction->name ?? '-'
-            ),
-        );
-
-        $snaptoken = Snap::getSnapToken($params);
-        $transaction->details()->create([
-            'snap_token' => $snaptoken
-        ]);
-        // $transaction->snaptoken = $snaptoken;
-        // $transaction->save();
-
-        return response()->json($snaptoken);
     }
 }

@@ -55,7 +55,18 @@
                         <span>Transaksi</span></a>
                 </li>
             @endcan
-
+            @can('Kerjasama View')
+            <li>
+                <a class="nav-link" href="{{ route('admin.kerjasama.index') }}"><i class="fas fa-tags"></i>
+                    <span>Kerjasama</span></a>
+            </li>
+        @endcan
+        @can('Kerjasama View')
+        <li>
+            <a class="nav-link" href="{{ route('admin.relawan.index') }}"><i class="fas fa-tags"></i>
+                <span>Relawan</span></a>
+        </li>
+    @endcan
             @canany(['Trash View','User View','Slider View','Social Media View','Filemanager View','Role View','Permission View','Setting View','Sitemap View',])
             <li class="menu-header">Master</li>
             @endcanany

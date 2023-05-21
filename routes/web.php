@@ -10,8 +10,10 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\TransController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\KerjasamaController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RelawanController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,40 +29,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verified' => true]);
+Auth::routes(['verified' => false]);
 
-Route::middleware('verifikasi')->group(function () {
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/campaign', [ProgramController::class, 'index'])->name('campaign.index');
+Route::get('/campaign/search', [ProgramController::class, 'search'])->name('campaign.search');
+Route::get('/campaign/category/{name}', [ProgramController::class, 'category'])->name('campaign.category');
+Route::get('/campaign/{name}', [ProgramController::class, 'show'])->name('campaign.show');
 
-    Route::get('/campaign', [ProgramController::class, 'index'])->name('campaign.index');
-    Route::get('/campaign/search', [ProgramController::class, 'search'])->name('campaign.search');
-    Route::get('/campaign/category/{name}', [ProgramController::class, 'category'])->name('campaign.category');
-    Route::get('/campaign/{name}', [ProgramController::class, 'show'])->name('campaign.show');
+Route::get('/cek-invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+Route::post('/cek-invoice', [InvoiceController::class, 'check'])->name('invoice.check');
 
-    Route::get('/cek-invoice', [InvoiceController::class, 'index'])->name('invoice.index');
-    Route::post('/cek-invoice', [InvoiceController::class, 'check'])->name('invoice.check');
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
+Route::get('/artikel/{name}', [ArtikelController::class, 'detail'])->name('artikel.show');
 
-    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
-    Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
-    Route::get('/artikel/{name}', [ArtikelController::class, 'detail'])->name('artikel.show');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-    Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/faq', [FAQController::class, 'index'])->name('faq');
 
-    Route::get('/faq', [FAQController::class, 'index'])->name('faq');
+Route::get('/trans', [TransController::class, 'index'])->name('trans');
 
-    Route::get('/trans', [TransController::class, 'index'])->name('trans');
+Route::post('donate', [TransactionController::class, 'donate'])->name('donate');
+Route::get('donate/{slug}', [TransactionController::class, 'payment'])->name('donate.payment');
 
-    Route::post('donate', [TransactionController::class, 'donate'])->name('donate');
-    Route::get('donate/{slug}', [TransactionController::class, 'payment'])->name('donate.payment');
+Route::get('success/{token}', [TransactionController::class, 'success'])->name('success');
 
-    Route::get('success/{token}', [TransactionController::class, 'success'])->name('success');
+Route::post('/get-payment', [PaymentController::class, 'get'])->name('payments.get');
 
-    Route::post('/get-payment', [PaymentController::class, 'get'])->name('payments.get');
+Route::get('/form-kerjasama',[KerjasamaController::class,'index'])->name('kerjasama.index');
+Route::post('/form-kerjasama',[KerjasamaController::class,'store'])->name('kerjasama.store');
 
-    Route::post('/create-payment', [TransactionController::class, 'createPayment'])->name('create-payment');
-});
-
+Route::get('/form-relawan',[RelawanController::class,'index'])->name('relawan.index');
+Route::post('/form-relawan',[RelawanController::class,'store'])->name('relawan.store');
 
 // donatur login
 Route::middleware('auth')->group(function () {

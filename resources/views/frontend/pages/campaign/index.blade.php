@@ -1,39 +1,24 @@
 @extends('frontend.layouts.app')
 @section('content')
-    <div class="container mb-4">
-        <div class="row">
-            <div class="col-12">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-                    <div class="carousel-inner">
-                        @foreach ($slider as $sd)
-                            <div class="carousel-item @if ($sd->id == $slider->first()->id) active @endif">
-                                <img src="{{ $sd->image() }}" class="d-block w-100 gambar-slider" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <p>{{ $sd->program->name ?? '-' }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div> <!-- end of container -->
-
     <section class="campaign">
         <div class="container">
+            <div class="row mb-2 mt-4">
+                <div class="col-md-12">
+                    <form action="{{ route('campaign.search') }}" method="get">
+                        <div class="input-group input-group-lg mb-3">
+                            <input type="text" class="form-control fs-6 rounded- input-group-lg" name="keyword"
+                                value="{{ $keyword }}" placeholder="Cari Keyword...">
+                            <span class="" id="basic-addon2">
+                                <button class="btn btn-lg btn-outline-primary rounded-1 fs-6">Cari</button>
+                            </span>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
             <div class="row my-3">
                 <div class="col-md-12">
-                    <h2 class="text-center">Donasi ke orang yang membutuhkan</h2>
+                    <h2 class="text-center">{{ $category->name ?? 'Donasi' }}</h2>
                 </div>
             </div>
             <div class="row border-0 bg-transparent">
@@ -68,14 +53,14 @@
                     </div>
                 @endforelse
             </div>
+            <div class="row justify-content-center">
+                {{ $items->appends(request()->all())->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </section>
 @endsection
 @push('styles')
     <style>
-        .gambar-slider {
-            max-height: 700px;
-        }
         .card-campaign{
             max-height:400px;
         }

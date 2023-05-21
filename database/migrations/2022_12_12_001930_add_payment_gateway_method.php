@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->enum('type',['manual','otomatis'])->after('code')->default('manual');
+            $table->enum('type',['manual'])->after('code')->default('manual');
         });
     }
 

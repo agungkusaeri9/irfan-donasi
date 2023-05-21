@@ -48,20 +48,20 @@ class SliderController extends Controller
                         $route = route('admin.sliders.edit',$model->id);
                         $routeDetail = route('admin.sliders.show',$model->id);
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' ||auth()->user()->getPermissions('Slider Detail')){
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' ||auth()->user()->getPermissions('Slider Detail')){
                             $detail = "<a href='$routeDetail' class='btn btn-sm btn-warning btnDetail mx-1' data-id='$model->id' data-title='$model->title'><i class='fas fa fa-eye'></i> Detail</a>";
                         }else{
                             $detail = "";
                         }
 
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' ||auth()->user()->getPermissions('Slider Edit')){
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' ||auth()->user()->getPermissions('Slider Edit')){
                             $edit = "<a href='$route' class='btn btn-sm btn-info btnEdit mx-1' data-id='$model->id' data-title='$model->title'><i class='fas fa fa-edit'></i> Edit</a>";
                         }else{
                             $edit = "";
                         }
 
-                        if(auth()->user()->getRoleNames()->first() === 'Super Admin' ||auth()->user()->getPermissions('Slider Delete')){
+                        if(auth()->user()->getRoleNames()->first() === 'Admin' ||auth()->user()->getPermissions('Slider Delete')){
                             $delete = "<button class='btn btn-sm btn-danger btnDelete mx-1' data-id='$model->id' data-title='$model->title'><i class='fas fa fa-trash'></i> Hapus</button>";
                         }else{
                             $delete = "";

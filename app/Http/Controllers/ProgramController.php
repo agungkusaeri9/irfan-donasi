@@ -11,7 +11,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $items = Program::active()->withCount('transactions_success')->latest()->get();
+        $items = Program::active()->withCount('transactions_success')->latest()->paginate(12);
         $categories = ProgramCategory::orderBy('name','ASC')->limit(4)->get();
         $slider = Slider::get();
         return view('frontend.pages.campaign.index',[
@@ -35,7 +35,7 @@ class ProgramController extends Controller
     public function category($slug)
     {
         $category = ProgramCategory::where('slug',$slug)->firstOrFail();
-        $items = Program::active()->where('program_category_id',$category->id)->withCount('transactions_success')->latest()->get();
+        $items = Program::active()->where('program_category_id',$category->id)->withCount('transactions_success')->latest()->paginate(12);
         $categories = ProgramCategory::orderBy('name','ASC')->limit(4)->get();
         $slider = Slider::get();
         return view('frontend.pages.campaign.index',[
@@ -51,7 +51,7 @@ class ProgramController extends Controller
     public function search()
     {
         $keyword = request('keyword');
-        $items = Program::active()->where('name','LIKE', '%' . $keyword . '%')->withCount('transactions_success')->latest()->get();
+        $items = Program::active()->where('name','LIKE', '%' . $keyword . '%')->withCount('transactions_success')->latest()->paginate(12);
         $categories = ProgramCategory::orderBy('name','ASC')->limit(4)->get();
         $slider = Slider::get();
         return view('frontend.pages.campaign.index',[

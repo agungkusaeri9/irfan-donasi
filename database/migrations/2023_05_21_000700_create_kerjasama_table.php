@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_tags', function (Blueprint $table) {
+        Schema::create('kerjasama', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug');
+            $table->string('nama_lengkap');
+            $table->string('nama_perusahaan');
+            $table->string('no_telepon_perusahaan');
+            $table->string('email_perusahaan');
+            $table->text('alamat_perusahaan');
+            $table->string('domisili');
+            $table->text('pesan');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_tags');
+        Schema::dropIfExists('kerjasama');
     }
 };
