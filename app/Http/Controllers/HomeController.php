@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $title = 'Selamat Datang di website resmi kami';
         $slider = Slider::get();
-        $items = Program::with('category')->withCount('transactions_success')->limit(12)->inRandomOrder()->get();
+        $items = Program::active()->with('category')->withCount('transactions_success')->limit(12)->inRandomOrder()->get();
         $post = Post::limit(4)->get();
         return view('frontend.pages.home', [
             'posts' => $post,
@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function campaign()
     {
         $slider = Slider::get();
-        $program = Program::get();
+        $program = Program::active()->get();
         $post = Post::get();
         return view('frontend.pages.campaign.campaign', [
             'post' => $post,

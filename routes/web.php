@@ -15,6 +15,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RelawanController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ZakatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,8 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/faq', [FAQController::class, 'index'])->name('faq');
 
 Route::get('/trans', [TransController::class, 'index'])->name('trans');
+Route::get('/zakat', [ZakatController::class, 'index'])->name('zakat.index');
+Route::post('/zakat', [ZakatController::class, 'hitung'])->name('zakat.hitung');
 
 Route::post('donate', [TransactionController::class, 'donate'])->name('donate');
 Route::get('donate/{slug}', [TransactionController::class, 'payment'])->name('donate.payment');

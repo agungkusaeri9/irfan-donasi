@@ -30,6 +30,9 @@
                     </li>
                 @endforeach
                 <li class="nav-item mx-2">
+                    <a class="nav-link" href="{{ route('zakat.index') }}">Zakat</a>
+                </li>
+                <li class="nav-item mx-2">
                     <a class="nav-link" href="{{ route('relawan.index') }}">Relawan</a>
                 </li>
                 <li class="nav-item mx-2">

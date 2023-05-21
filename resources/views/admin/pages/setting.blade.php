@@ -148,6 +148,26 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="zakat_fitrah_uang">Zakat Fitrah Uang</label>
+                                    <input type="number" class="form-control @error('zakat_fitrah_uang') is-invalid @enderror"
+                                        value="{{ $setting->zakat_fitrah_uang }}" name="zakat_fitrah_uang">
+                                    @error('zakat_fitrah_uang')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="zakat_fitrah_beras">Zakat Fitrah Beras (Kg)</label>
+                                    <input type="text" class="form-control @error('zakat_fitrah_beras') is-invalid @enderror"
+                                        value="{{ $setting->zakat_fitrah_beras }}" name="zakat_fitrah_beras">
+                                    @error('zakat_fitrah_beras')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="admin_fee">Biaya Admin (%)</label>
                                     <input type="text" class="form-control @error('admin_fee') is-invalid @enderror"
                                         value="{{ $setting->admin_fee }}" name="admin_fee">

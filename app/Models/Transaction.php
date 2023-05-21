@@ -51,7 +51,7 @@ class Transaction extends Model
     {
         if($this->is_anonim)
         {
-            return 'Hamba Allah';
+            return 'Anonymouse';
         }else{
             return $this->name;
         }
